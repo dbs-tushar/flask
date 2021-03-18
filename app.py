@@ -35,6 +35,16 @@ def update():
   mysql.connection.commit()
   return '{"Result":"Update Success"}'
 
+@app.route("/delete") #Add Student
+def delete():
+  studentID = request.args.get('id')
+  cur = mysql.connection.cursor() #create a connection to the SQL instance
+  s='''DELETE FROM students WHERE studentID={};'''.format(studentID)
+  cur.execute(s)
+  mysql.connection.commit()
+  return '{"Result":"Success Delete"}'
+
+
 @app.route("/") #Default - Show Data
 def hello(): # Name of the method
   cur = mysql.connection.cursor() #create a connection to the SQL instance
